@@ -1,5 +1,5 @@
 package com.company.nodeItem;
 
-public interface isNode {
+public interface IsNode {
     ItemType isNode();
 }

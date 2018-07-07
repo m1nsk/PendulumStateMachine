@@ -9,6 +9,9 @@ import com.company.nodeItem.ItemType;
 import com.company.nodeItem.Leaf;
 import com.company.nodeItem.LimitType;
 import com.company.nodeItem.Node;
+import com.company.stateMachine.PendulumSwingState;
+import com.company.stateMachine.StateMachine;
+import com.company.stateMachine.iterItem.WrongTypeException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +68,7 @@ public class Main {
             "]" +
             "}";
 
-    public static void main(String[] args) throws InstructionParseException {
+    public static void main(String[] args) throws InstructionParseException, WrongTypeException, InterruptedException {
         List<Item> items = new ArrayList<>();
         items.add(new LeafImpl(LimitType.COUNT, 1, "1"));
         items.add(new LeafImpl(LimitType.COUNT, 1, "2"));
@@ -77,7 +80,27 @@ public class Main {
         items.add(new LeafImpl(LimitType.COUNT, 1, "6"));
 
         Item node = new NodeImpl(LimitType.COUNT, 2, items);
-        System.out.println(Parser.parse(jsonString));
+        StateMachine sm = new StateMachine();
+        sm.setInstructions(Parser.parse(jsonString));
+        List<PendulumSwingState> swingStates = new ArrayList<>();
+        swingStates.add(PendulumSwingState.FREE);
+        swingStates.add(PendulumSwingState.LEFT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.FREE);
+        swingStates.add(PendulumSwingState.ZERO);
+        swingStates.add(PendulumSwingState.FREE);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.FREE);
+        swingStates.add(PendulumSwingState.LEFT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.FREE);
+        swingStates.add(PendulumSwingState.ZERO);
+        swingStates.add(PendulumSwingState.FREE);
+        swingStates.add(PendulumSwingState.RIGHT);
+        for (int i = 0; i < swingStates.size(); i++) {
+            sm.newState(swingStates.get(i));
+            Thread.sleep(1000);
+        }
 //        iterateOverTree(node);
 //        parseInstruction(jsonString);
     }
@@ -85,7 +108,7 @@ public class Main {
     private static void iterateOverTree(Item item){
         if(item.isNode().equals(ItemType.NODE)) {
             Node node = (Node)item;
-            for (int i = 0; i < node.listLen(); i++) {
+            for (int i = 0; i < node.getLen(); i++) {
                 iterateOverTree(node.getItem(i));
             }
         }

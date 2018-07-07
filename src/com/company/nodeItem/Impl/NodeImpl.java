@@ -20,7 +20,7 @@ public class NodeImpl extends Item implements Node {
     }
 
     @Override
-    public int listLen() {
+    public int getLen() {
         return items.size();
     }
 

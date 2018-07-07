@@ -4,5 +4,5 @@ import com.company.nodeItem.Impl.Item;
 
 public interface Node {
     Item getItem(int i);
-    int listLen();
+    int getLen();
 }

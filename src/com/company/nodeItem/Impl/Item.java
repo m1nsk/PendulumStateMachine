@@ -1,10 +1,11 @@
 package com.company.nodeItem.Impl;
 
+import com.company.nodeItem.IsNode;
 import com.company.nodeItem.ItemType;
 import com.company.nodeItem.LimitType;
 import com.company.nodeItem.Limits;
 
-public abstract class Item implements com.company.nodeItem.isNode, Limits {
+public abstract class Item implements IsNode, Limits {
     private ItemType isNode;
     private LimitType limitType;
     private int limitValue;

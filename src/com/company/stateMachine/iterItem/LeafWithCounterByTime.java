@@ -3,11 +3,11 @@ package com.company.stateMachine.iterItem;
 import com.company.nodeItem.Impl.Item;
 import com.company.stateMachine.PendulumSwingState;
 
-public class ItemWithCounterByTime implements IterItem {
+public class LeafWithCounterByTime implements IterItem {
     private int start;
     private int counter;
 
-    public ItemWithCounterByTime(Item item) {
+    public LeafWithCounterByTime(Item item) {
         start = (int)(System.nanoTime() / 1_000_000_000);
         counter = start + item.getLimitValue();
     }
@@ -20,5 +20,20 @@ public class ItemWithCounterByTime implements IterItem {
     @Override
     public boolean checkTime() {
         return System.nanoTime() / 1_000_000_000 > counter;
+    }
+
+    @Override
+    public boolean hasNext() {
+        return true;
+    }
+
+    @Override
+    public boolean isNode() {
+        return false;
+    }
+
+    @Override
+    public Item next() {
+        return null;
     }
 }
