@@ -69,17 +69,17 @@ public class Main {
             "}";
 
     public static void main(String[] args) throws InstructionParseException, WrongTypeException, InterruptedException {
-        List<Item> items = new ArrayList<>();
-        items.add(new LeafImpl(LimitType.COUNT, 1, "1"));
-        items.add(new LeafImpl(LimitType.COUNT, 1, "2"));
-        List<Item> items1 = new ArrayList<>();
-        items1.add(new LeafImpl(LimitType.COUNT, 1, "3"));
-        items1.add(new LeafImpl(LimitType.COUNT, 1, "4"));
-        items.add(new NodeImpl(LimitType.COUNT, 2, items1));
-        items.add(new LeafImpl(LimitType.COUNT, 1, "5"));
-        items.add(new LeafImpl(LimitType.COUNT, 1, "6"));
+//        List<Item> items = new ArrayList<>();
+//        items.add(new LeafImpl(LimitType.COUNT, 1, "1"));
+//        items.add(new LeafImpl(LimitType.COUNT, 1, "2"));
+//        List<Item> items1 = new ArrayList<>();
+//        items1.add(new LeafImpl(LimitType.COUNT, 1, "3"));
+//        items1.add(new LeafImpl(LimitType.COUNT, 1, "4"));
+//        items.add(new NodeImpl(LimitType.COUNT, 2, items1));
+//        items.add(new LeafImpl(LimitType.COUNT, 1, "5"));
+//        items.add(new LeafImpl(LimitType.COUNT, 1, "6"));
 
-        Item node = new NodeImpl(LimitType.COUNT, 2, items);
+//        Item node = new NodeImpl(LimitType.COUNT, 2, items);
         StateMachine sm = new StateMachine();
         sm.setInstructions(Parser.parse(jsonString));
         List<PendulumSwingState> swingStates = new ArrayList<>();

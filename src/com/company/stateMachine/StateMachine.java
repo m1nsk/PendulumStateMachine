@@ -15,8 +15,12 @@ public class StateMachine {
         itemsStack = new LinkedList<>();
     }
 
+    private IterItem onTop(){
+        return itemsStack.peekLast();
+    }
+
     public void newState(PendulumSwingState state) throws WrongTypeException {
-        if (itemsStack.peek().getNewSample(state)) {
+        if (onTop().getNewSample(state)) {
             System.out.println(state);
             getNextItem();
         }
@@ -24,9 +28,9 @@ public class StateMachine {
     }
 
     private void getNextItem() throws WrongTypeException {
-        itemsStack.pop();
-        if(itemsStack.peek().hasNext()){
-            Item newItem = itemsStack.peek().next();
+        itemsStack.removeLast();
+        if(onTop().hasNext()){
+            Item newItem = onTop().next();
             if(newItem != null) {
                 pushItem(newItem);
             }
@@ -39,14 +43,14 @@ public class StateMachine {
     public void setInstructions(Item instruction) throws WrongTypeException {
         itemsStack.clear();
         this.instruction = instruction;
-        pushItem(instruction);
+        pushItem(this.instruction);
     }
 
     private void pushItem(Item item) throws WrongTypeException {
         System.out.println(item);
-        itemsStack.push(ItemWithCounterFactory.getItem(item));
-        if (itemsStack.peek().isNode()) {
-            pushItem(itemsStack.peek().next());
+        itemsStack.addLast(ItemWithCounterFactory.getItem(item));
+        if (onTop().isNode()) {
+            pushItem(onTop().next());
         }
     }
 
@@ -54,7 +58,7 @@ public class StateMachine {
         for (int i = 0; i < itemsStack.size(); i++) {
             if (itemsStack.get(i).checkTime()) {
                 for (int j = 0; j < itemsStack.size() - i ; j++) {
-                    itemsStack.pop();
+                    itemsStack.removeLast();
                 }
                 break;
             }
