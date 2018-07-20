@@ -2,6 +2,7 @@ package com.company;
 
 import com.company.jsonParser.InstructionParseException;
 import com.company.jsonParser.Parser;
+import com.company.jsonParser.ParserNew;
 import com.company.nodeItem.Impl.Item;
 import com.company.nodeItem.Impl.LeafImpl;
 import com.company.nodeItem.Impl.NodeImpl;
@@ -11,6 +12,7 @@ import com.company.nodeItem.LimitType;
 import com.company.nodeItem.Node;
 import com.company.stateMachine.PendulumSwingState;
 import com.company.stateMachine.StateMachine;
+import com.company.stateMachine.StateMachineNew;
 import com.company.stateMachine.iterItem.WrongTypeException;
 
 import java.util.ArrayList;
@@ -31,18 +33,18 @@ public class Main {
                     "{" +
                     "\"type\":\"leaf\"" +
                     "\"limitType\":\"count\"" +
-                    "\"limitValue\":\"2\"" +
+                    "\"limitValue\":\"1\"" +
                     "\"data\":\"b\"" +
                     "}" +
                     "{" +
                         "\"type\":\"node\"" +
                         "\"limitType\":\"count\"" +
-                        "\"limitValue\":\"1\"" +
+                        "\"limitValue\":\"3\"" +
                         "\"items\":[" +
                                 "{" +
                                 "\"type\":\"leaf\"" +
                                 "\"limitType\":\"count\"" +
-                                "\"limitValue\":\"1\"" +
+                                "\"limitValue\":\"2\"" +
                                 "\"data\":\"1\"" +
                                 "}" +
                                 "{" +
@@ -80,8 +82,10 @@ public class Main {
 //        items.add(new LeafImpl(LimitType.COUNT, 1, "6"));
 
 //        Item node = new NodeImpl(LimitType.COUNT, 2, items);
-        StateMachine sm = new StateMachine();
-        sm.setInstructions(Parser.parse(jsonString));
+        StateMachineNew sm = new StateMachineNew();
+//        sm.setInstructions(Parser.parse(jsonString));
+        com.company.Node.Item node = ParserNew.parse(jsonString, new com.company.Node.NodeImpl(LimitType.COUNT, 0));
+        sm.setInstructions(node);
         List<PendulumSwingState> swingStates = new ArrayList<>();
         swingStates.add(PendulumSwingState.FREE);
         swingStates.add(PendulumSwingState.LEFT);
@@ -97,9 +101,43 @@ public class Main {
         swingStates.add(PendulumSwingState.ZERO);
         swingStates.add(PendulumSwingState.FREE);
         swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
+        swingStates.add(PendulumSwingState.RIGHT);
         for (int i = 0; i < swingStates.size(); i++) {
             sm.newState(swingStates.get(i));
-            Thread.sleep(1000);
+            Thread.sleep(100);
         }
 //        iterateOverTree(node);
 //        parseInstruction(jsonString);
