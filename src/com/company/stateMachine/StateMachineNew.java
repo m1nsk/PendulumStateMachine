@@ -1,9 +1,9 @@
 package com.company.stateMachine;
 
-import com.company.Node.impl.Item;
 import com.company.Node.enums.ItemType;
 import com.company.Node.enums.LimitType;
 import com.company.Node.exceptions.WrongTypeException;
+import com.company.Node.impl.Item;
 
 import java.util.LinkedList;
 

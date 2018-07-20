@@ -1,10 +1,9 @@
 package com.company.Node.impl;
 
 import com.company.Node.enums.ItemType;
-import com.company.nodeItem.Leaf;
 import com.company.Node.enums.LimitType;
 
-public class LeafImpl extends Item implements Leaf<String> {
+public class LeafImpl extends Item {
     private String data;
 
     public LeafImpl(LimitType limitType, int limitValue, String data, Item next) {
@@ -14,7 +13,6 @@ public class LeafImpl extends Item implements Leaf<String> {
         setNext(next);
     }
 
-    @Override
     public String getData() {
         return data;
     }
