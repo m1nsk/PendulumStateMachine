@@ -1,10 +1,10 @@
 package com.company.jsonParser;
 
-import com.company.Node.LeafImpl;
-import com.company.Node.Item;
-import com.company.Node.NodeImpl;
-import com.company.nodeItem.ItemType;
-import com.company.nodeItem.LimitType;
+import com.company.Node.impl.LeafImpl;
+import com.company.Node.impl.Item;
+import com.company.Node.impl.NodeImpl;
+import com.company.Node.enums.ItemType;
+import com.company.Node.enums.LimitType;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;

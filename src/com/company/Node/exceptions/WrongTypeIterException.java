@@ -1,4 +1,4 @@
-package com.company.Node;
+package com.company.Node.exceptions;
 
 public class WrongTypeIterException extends RuntimeException {
     public WrongTypeIterException() {

@@ -1,4 +1,4 @@
-package com.company.nodeItem;
+package com.company.Node.enums;
 
 public enum ItemType {
     NODE, LEAF

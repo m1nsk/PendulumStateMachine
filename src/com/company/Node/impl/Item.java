@@ -1,9 +1,12 @@
-package com.company.Node;
+package com.company.Node.impl;
 
-import com.company.nodeItem.IsNode;
-import com.company.nodeItem.ItemType;
-import com.company.nodeItem.LimitType;
-import com.company.nodeItem.Limits;
+import com.company.Node.CurrentTime;
+import com.company.Node.NodeIterator;
+import com.company.Node.exceptions.WrongTypeIterException;
+import com.company.Node.IsNode;
+import com.company.Node.enums.ItemType;
+import com.company.Node.enums.LimitType;
+import com.company.Node.Limits;
 
 public class Item implements IsNode, Limits, NodeIterator {
     private ItemType isNode;
@@ -13,14 +16,16 @@ public class Item implements IsNode, Limits, NodeIterator {
     private long timeCounter;
     private Item deepNext;
     private Item next;
+    private CurrentTime timer;
 
 
-    public Item(ItemType isNode, LimitType limitType, int limitValue) {
+    public Item(ItemType isNode, LimitType limitType, int limitValue, CurrentTime timer) {
         this.isNode = isNode;
         this.limitType = limitType;
         this.limitValue = limitValue;
         counter = 0;
-        timeCounter = System.nanoTime() / 1000;
+        this.timer = timer;
+        timeCounter = timer.getCurrentTimeMs();
     }
 
     public void setDeepNext(Item deepNext) {
@@ -64,7 +69,7 @@ public class Item implements IsNode, Limits, NodeIterator {
     public Item next() {
         if (limitType == LimitType.COUNT)
             throw new WrongTypeIterException();
-        if (timeCounter + limitValue <= System.nanoTime() / 1000) {
+        if (timeCounter + limitValue <= timer.getCurrentTimeMs()) {
             return deepNext;
         }
         return this;

@@ -1,9 +1,9 @@
 package com.company.stateMachine;
 
-import com.company.Node.Item;
-import com.company.nodeItem.ItemType;
-import com.company.nodeItem.LimitType;
-import com.company.stateMachine.iterItem.WrongTypeException;
+import com.company.Node.impl.Item;
+import com.company.Node.enums.ItemType;
+import com.company.Node.enums.LimitType;
+import com.company.Node.exceptions.WrongTypeException;
 
 import java.util.LinkedList;
 
@@ -19,15 +19,15 @@ public class StateMachineNew {
         return itemsStack.peekLast();
     }
 
-    public void newState(PendulumSwingState state) throws WrongTypeException {
+    public void newState(boolean state) throws WrongTypeException {
         if (onTop().hasNext()) {
             switch (onTop().getLimitType()){
                 case COUNT: {
-                    Item item = onTop().next(isTurn(state));
+                    Item item = onTop().next(state);
                     if (item != onTop()) {
                         itemsStack.removeLast();
-                        if (itemsStack.peekLast() == item) {
-                            pushItem(item.next(true));
+                        if (onTop() == item) {
+                            newState(true);
                         } else {
                             pushItem(item);
                         }
@@ -44,10 +44,6 @@ public class StateMachineNew {
             }
         }
         checkTimeLimit();
-    }
-
-    private boolean isTurn(PendulumSwingState state) {
-        return state == PendulumSwingState.LEFT || state == PendulumSwingState.RIGHT;
     }
 
 
